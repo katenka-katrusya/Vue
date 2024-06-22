@@ -43,6 +43,12 @@ const App = {
     },
 
     changeTask(name, id) {
+      this.notes.forEach(note => {
+        if (note.id !== id) {
+          note.isDblclick = false;
+        }
+      })
+
       let note = this.notes.find(note => note.id === id);
 
       if (note.isDblclick) {
@@ -52,6 +58,7 @@ const App = {
       }
 
       note.isDblclick = !note.isDblclick;
+
     },
 
     onSubmit() {
