@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#1 - Vue Init; Work with data</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="app">
+      {{title}}
+      <button @click="change">Нажми!</button>
+    </div>
+  </div>
+  
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    const App = {
+      data() {
+        return {
+          title: 'Hello, Vue!',
+          isToggled: false,
+        };
+      },
+      methods: {
+        change() {
+          this.isToggled = !this.isToggled;
+          this.title = this.isToggled ? 'Привет, Vue!' : 'Hello, Vue!';
+        },
+      },
+    };
+    
+    Vue.createApp(App).mount('#app');
+  </script>
+</body>
+</html>

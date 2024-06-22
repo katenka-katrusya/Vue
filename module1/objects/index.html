@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#2-3 - Vue Init; Work with objects</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="app">
+      <div class="app__header">
+        {{priority.title}} - {{priority.value}}
+      </div>
+      <br>
+      <div class="app__body">
+        <button @click="up" :style="{color: buttons.prev.color}">{{buttons.prev
+          .title}}
+        </button>
+        <button @click="down" :style="{color: buttons.next.color}">{{buttons
+          .next.title}}
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <script src="https://unpkg.com/vue"></script>
+  <script>
+    const App = {
+      data() {
+        return {
+          priority: {
+            title: 'Priority',
+            value: 0,
+          },
+          buttons: {
+            prev: {
+              title: 'Up',
+              color: 'blue',
+            },
+            next: {
+              title: 'Down',
+              color: 'red',
+            }
+          }
+        };
+      },
+      methods: {
+        up() {
+          this.priority.value++;
+        },
+        down() {
+          this.priority.value > 0 ? this.priority.value-- : 0;
+        }
+      },
+    };
+
+    Vue.createApp(App).mount('#app');
+  </script>
+</body>
+</html>

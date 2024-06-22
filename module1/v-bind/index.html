@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>#6 - Vue Init; Work with v-bind</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="app">
+      <input type="checkbox" v-model="imgShow">
+      <input type="text" placeholder="title" v-model="title">
+      <input type="text" placeholder="img" v-model="imgUrl">
+      <br>
+      <div v-if="imgShow" class="img__wrapper">
+        <img @click="changeImg" :src="imgUrl" :alt="title" :title="title" width="300">
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    const App = {
+      data() {
+        return {
+          imgShow: true,
+          title: 'Скума',
+          imgUrl: './img/Skuma-1.jpg',
+        }
+      },
+      methods: {
+        changeImg() {
+          const images = ['./img/Skuma-1.jpg', './img/Skuma-2.jpg'];
+          this.imgUrl = images[Math.floor(Math.random() * images.length)];
+        }
+      }
+    }
+    
+    Vue.createApp(App).mount('#app');
+  </script>
+</body>
+</html>

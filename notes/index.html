@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home Work #1</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+  
+  <div class="wrapper">
+    <div id="app">
+      <h1>{{title}}</h1>
+      <form @submit.prevent="onSubmit">
+        <input type="text"
+               v-model="input.value"
+               :placeholder="input.placeholder">
+        <button type="submit">submit</button>
+      </form>
+      
+      <div class="notes">
+        <div class="note"
+             v-for="note in notes"
+             :key="note.id">
+          <p @dblclick="changeTask(note.name, note.id)">
+            <span @click="removeElement(note.id)"
+                  style="cursor: pointer;"
+                  class="close">
+              <strong>&#10005;</strong>
+            </span>
+            
+            {{note.name}}
+            
+            <input v-if="note.isDblclick"
+                   @blur="changeTask(note.name, note.id)"
+                   v-model="editInput.value"
+                   type="text"
+                   placeholder="Измените задачу...">
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="./app.js"></script>
+</body>
+</html>

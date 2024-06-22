@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>#4 - Vue Init; Work with computed</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div id="app">
+            {{message}}
+            
+            <div class="app__header">
+                {{priority.title}} - {{priority.value}}
+            </div>
+            <br>
+            
+            <p v-if="priority.value === 10">10!!! Стоп!</p>
+            <p v-if="priority.value === 5 || priority.value === 15">тут или 5 или 15</p>
+            <p v-else>Приоритет = {{priority.value}}</p>
+            
+            <div class="app__body">
+                <button @click="up" :style="{color: buttons.prev.color}">
+                    {{buttons.prev.title}}
+                </button>
+                <button :disabled="isDisabled" @click="down" :style="{color: buttons.next.color}">
+                    {{buttons.next.title}}
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+        const App = {
+            data() {
+                return {
+                    priority: {
+                        title: 'Priority',
+                        value: 0,
+                    },
+                    buttons: {
+                        prev: {
+                            title: 'Up',
+                            color: 'blue',
+                        },
+                        next: {
+                            title: 'Down',
+                            color: 'red',
+                            disabled: false,
+                        }
+                    }
+                };
+            },
+            methods: {
+                up() {
+                    this.priority.value++;
+                },
+                down() {
+                    this.priority.value > 0 ? this.priority.value-- : 0;
+                }
+            },
+            computed: {
+                message() {
+                    const messages = {
+                        welcome: 'Make some Vote',
+                        save: 'Saved!',
+                    }
+                    return this.priority.value > 0 ? messages.save : messages.welcome
+                },
+                isDisabled() {
+                    return this.priority.value === 0;
+                }
+            }
+        };
+        
+        Vue.createApp(App).mount('#app');
+    </script>
+</body>
+</html>
